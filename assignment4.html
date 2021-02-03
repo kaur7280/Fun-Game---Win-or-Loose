@@ -1,0 +1,136 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Assignment-4</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <script type='text/javascript'>
+           var count = 1;
+			var tap = 1;
+            window.addEventListener("load", function (event) {
+                var radius = 50;
+                var x = 0, y = 200;    
+                var timerId;  
+var xinc = 2;
+var yinc = 2;
+		
+
+                function startAnimation() {
+                    timerId = setInterval(updateAnimation,10);
+					
+                }
+				function dominus(){
+				document.getElementById("wrong").value = tap++;
+			
+	   
+				}
+				 function domath(){
+		 document.getElementById("score").value = count++;
+		
+		
+	   }
+	    function dodomath(){
+		
+		domath();
+		document.getElementById("final").value = document.getElementById("score").value - document.getElementById("wrong").value;
+		
+		}
+	   
+	function dodominus(){
+		
+		dominus();
+		document.getElementById("final").value = document.getElementById("score").value - document.getElementById("wrong").value;
+		
+		}
+	   
+	   
+
+                function stopAnimation() {
+                    
+					
+					clearTimeout(timerId);
+					alert("GAME OVER!! |YOUR SCORE : " + document.getElementById("final").value);
+                      
+				}
+
+                function updateAnimation() {
+                    x = x + xinc;
+					y = y + yinc;
+
+                    var e = document.getElementById("movingBall");
+                    e.style.left=x+"px";
+                    e.style.top=y+"px";
+      
+                    if (y> window.innerHeight - radius*2  || y<0)
+					{yinc*= -1;
+					document.getElementById("movingBall").style.backgroundColor = "blue";
+					document.getElementById("movingBall").onclick = dodominus;
+                     }   //stopAnimation();
+                if(x>  window.innerWidth - radius*2 || x<0)
+                      {    xinc*= -1;
+                       document.getElementById("movingBall").style.backgroundColor = "red";
+					   
+					document.getElementById("movingBall").onclick=dodomath;
+                           
+		
+                    }
+                 }
+				setTimeout(stopAnimation,35000);
+               startAnimation();
+		document.getElementById("stop").onclick=stopAnimation;
+		 		     
+            });
+        </script>
+        <style>
+		body{
+		margin:0px;
+		padding:0px;
+		background-color:black;
+		color:white;
+		
+		}
+		div{
+		color:white;
+		display:inline;
+		}
+		
+            #movingBall {
+                position: absolute;
+				top:200px;
+				left:0px;
+                width:100px;
+                height:100px;
+                border-radius:200px;
+				background-color:green;
+              }
+			  #movingBall:hover
+			  {
+			  cursor:pointer;
+			  
+			  }
+        </style>
+    </head>
+    <body style='text-align:center;'>
+	<h1>Catch Red balls to win the game</h1>
+	
+<br>
+<div id =  "scr">
+Catched Red ball:
+<input type = "number" id = "score" value = "">
+<br><br>
+Wrong attempt!! you hit Blue Ball:
+<input type = "number" id = "wrong">
+<br><br>
+
+YOUR SCORE:
+<input type = "number" id = "final">
+</div>
+<div>
+	To Stop the GAME:<button id = "stop">stop</button>
+</div>
+	    <div id="movingBall"></div>
+         
+
+    </body>
+</html>
